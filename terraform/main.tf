@@ -58,7 +58,7 @@ resource "google_composer_environment" "example_environment" {
   // https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/composer_environment#with-gke-and-compute-resource-dependencies
   provider = google
   name = "eric-lab-1-environment"
-  region = "us-central1"
+  region = var.region
 
   config {
     environment_size = "ENVIRONMENT_SIZE_SMALL"

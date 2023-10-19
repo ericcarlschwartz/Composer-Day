@@ -29,9 +29,9 @@ from airflow.utils import trigger_rule
 
 target_dataset_name = "greenhat_summary"
 target_table_name = "readings_by_street"
-location = "us-central1"
+location = "europe-west1"
 project_id = "composer-workshop"
-gcs_bucket = "{{params.output_gcs_bucket}}"
+gcs_bucket = "{{ params.output_gcs_bucket }}"
 csv_output_file = f"gs://{gcs_bucket}/street_readings.csv"
 avro_output_file = f"gs://{gcs_bucket}/street_readings.avro"
 
@@ -95,7 +95,7 @@ with models.DAG(
         task_id="make_bq_dataset",
         # Executing 'bq' command requires Google Cloud SDK which comes
         # preinstalled in Cloud Composer.
-        bash_command="bq ls  {{ params.bq_dataset_name }} || bq mk --location=us-central1 {{ params.bq_dataset_name }}",
+        bash_command="bq ls  {{ params.bq_dataset_name }} || bq mk --location=europe-west1 {{ params.bq_dataset_name }}",
     )
     
     bq_aggregate_streets = bigquery.BigQueryInsertJobOperator(

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 DATASET_NAME=greenhat
-REGION=us-central1
+REGION=europe-west1
 PROJECT_ID=$(gcloud projects describe $(gcloud config get project) --format="value(projectId)")
 DATA_OUTPUT_BUCKET="gs://${PROJECT_ID}-data-output/"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )

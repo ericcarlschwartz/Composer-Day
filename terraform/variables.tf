@@ -3,5 +3,5 @@ variable "my_gcp_project" {
 }
 
 variable "region" {
-  default = "us-central-1" # example "us-central1"
+  default = "europe-west1" # example "us-central1"
 }
