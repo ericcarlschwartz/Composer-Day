@@ -42,3 +42,11 @@ with models.DAG(
     print_dag_run_conf = bash.BashOperator(
         task_id="print_dag_run_conf", bash_command="echo {{ dag_run.id }}"
     )
+
+    print_a_fake_secret = bash.BashOperator(
+        task_id="print_a_fake_secret", bash_command="echo {{ var.value.eric_secret }}"
+    )
+
+
+    # Define DAG dependencies.
+    print_dag_run_conf >> print_a_fake_secret
