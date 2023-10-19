@@ -15,6 +15,7 @@ import datetime
 
 from airflow import models
 from airflow.operators import bash
+from airflow.models.variable import Variable
 
 # If you are running Airflow in more than one time zone
 # see https://airflow.apache.org/docs/apache-airflow/stable/timezone.html
@@ -32,6 +33,8 @@ default_args = {
     "start_date": YESTERDAY,
 }
 
+eric_secret = Variable.get('eric_secret')
+
 with models.DAG(
     "composer_sample_dag",
     "catchup=False",
@@ -45,12 +48,17 @@ with models.DAG(
 
     print_a_fake_secret = bash.BashOperator(
         task_id="print_a_fake_secret", bash_command="echo {{ var.variable.eric_secret }}"
+    )
 
     print_a_fake_secret_another_way = bash.BashOperator(
         task_id="print_a_fake_secret", bash_command="gcloud secrets versions access latest --secret='example-variables-eric_secret'"
     )
 
+    print_a_fake_secret_third_way = bash.BashOperator(
+        task_id="print_a_fake_secret", bash_command="echo {{ eric_secret }}"
+    )
+
     # Define DAG dependencies.
     print_dag_run_conf >> print_a_fake_secret
     print_a_fake_secret >> print_a_fake_secret_another_way
-    
+    print_a_fake_secret >> print_a_fake_secret_third_way
