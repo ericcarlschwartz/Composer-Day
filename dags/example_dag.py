@@ -51,11 +51,11 @@ with models.DAG(
     )
 
     print_a_fake_secret_another_way = bash.BashOperator(
-        task_id="print_a_fake_secret", bash_command="gcloud secrets versions access latest --secret='example-variables-eric_secret'"
+        task_id="print_a_fake_secret_another_way", bash_command="gcloud secrets versions access latest --secret='example-variables-eric_secret'"
     )
 
     print_a_fake_secret_third_way = bash.BashOperator(
-        task_id="print_a_fake_secret", bash_command="echo {{ eric_secret }}"
+        task_id="print_a_fake_secret_third_way", bash_command="echo {{ eric_secret }}"
     )
 
     # Define DAG dependencies.
