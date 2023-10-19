@@ -60,5 +60,4 @@ with models.DAG(
 
     # Define DAG dependencies.
     print_dag_run_conf >> print_a_fake_secret
-    print_a_fake_secret >> print_a_fake_secret_another_way
-    print_a_fake_secret >> print_a_fake_secret_third_way
+    print_a_fake_secret >> [print_a_fake_secret_another_way, print_a_fake_secret_third_way]
