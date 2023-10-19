@@ -77,6 +77,13 @@ resource "google_composer_environment" "example_environment" {
 
       service_account = google_service_account.custom_service_account.name
     }
+
+    software_config {
+      airflow_config_overrides = {
+        secrets-backend = "airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend",
+        secrets-backend_kwargs = jsonencode({"project_id": "${var.my_gcp_project}", "connections_prefix":"example-connections", "variables_prefix":"example-variables", "sep":"-"})
+      }
+    }
   }
 }
 
