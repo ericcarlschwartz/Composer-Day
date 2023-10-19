@@ -1,0 +1,6 @@
+
+steps:
+  # install dependencies
+  - name: python:3.8-slim
+    entrypoint: echo
+    args: ["dag deploy"]
