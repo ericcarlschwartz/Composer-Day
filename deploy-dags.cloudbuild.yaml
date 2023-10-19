@@ -22,7 +22,6 @@ steps:
   # run
   - name: python
     entrypoint: python
-    args: ["utils/add_dags_to_composer.py", "--dags_directory=dags/", "--dags_bucket=europe-west1-eric-lab-1-env-77ef82f5-bucket
-"]
+    args: ["utils/add_dags_to_composer.py", "--dags_directory=dags/", "--dags_bucket=europe-west1-eric-lab-1-env-77ef82f5-bucket"]
 
 # [END composer_cicd_dagsync_yaml]
