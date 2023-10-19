@@ -57,12 +57,19 @@ resource "google_composer_environment" "example_environment" {
   // Create a cloud composer 2 instance following the documenation below: 
   // https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/composer_environment#with-gke-and-compute-resource-dependencies
   provider = google
-  name = "eschwartz-lab-1-environment"
+  name = "eric-lab-1-environment"
   region = "us-central1"
 
   config {
     environment_size = "ENVIRONMENT_SIZE_SMALL"
+
+    node_config {
+      network    = google_compute_network.test.id
+      subnetwork = google_compute_subnetwork.test.id
+
+      service_account = google_service_account.custom_service_account.name
     }
+  }
 }
 
 resource "google_compute_network" "test" {
