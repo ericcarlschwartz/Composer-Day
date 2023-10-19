@@ -44,9 +44,13 @@ with models.DAG(
     )
 
     print_a_fake_secret = bash.BashOperator(
-        task_id="print_a_fake_secret", bash_command="echo {{ var.value.eric_secret }}"
-    )
+        task_id="print_a_fake_secret", bash_command="echo {{ var.variable.eric_secret }}"
 
+    print_a_fake_secret_another_way = bash.BashOperator(
+        task_id="print_a_fake_secret", bash_command="gcloud secrets versions access latest --secret='example-variables-eric_secret'"
+    )
 
     # Define DAG dependencies.
     print_dag_run_conf >> print_a_fake_secret
+    print_a_fake_secret >> print_a_fake_secret_another_way
+    
