@@ -42,6 +42,14 @@ resource "google_project_iam_member" "custom_service_account" {
   role = "roles/composer.worker"
 }
 
+resource "google_project_iam_member" "custom_service_account_secret_role" {
+  provider = google
+  project  = var.my_gcp_project
+  member   = format("serviceAccount:%s", google_service_account.custom_service_account.email)
+  // Role for Public IP environments
+  role = "roles/secretmanager.secretAccessor"
+}
+
 resource "google_service_account_iam_member" "custom_service_account" {
   provider           = google
   service_account_id = google_service_account.custom_service_account.name
